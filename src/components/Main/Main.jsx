@@ -7,6 +7,29 @@ const Main = () => {
 
     const {onSent,recentPrompt,showResult,loading,resultData,setInput,input} = useContext(Context);
 
+    const cards = [
+        {
+            prompt: 'Suggest beautiful places to see on an upcoming road trip',
+            icon: assets.compass_icon
+        },
+        {
+            prompt: 'Briefly summarise this concept: urban planning',
+            icon: assets.bulb_icon
+        },
+        {
+            prompt: 'Brainstorm bonding activities for our work retreat',
+            icon: assets.message_icon
+        },
+        {
+            prompt: 'Improve the readability of the following code',
+            icon: assets.code_icon
+        }
+    ];
+
+    const handleCardClick = (prompt) => {
+        setInput(prompt);
+        onSent(prompt);
+    };
 
   return (
     <div className='main'>
@@ -24,23 +47,13 @@ const Main = () => {
                     <p>How can I help you?</p>
                 </div>
                 <div className="cards">
-                    <div className="card">
-                        <p>Suggest beautiful places to see on an upcoming road trip</p>
-                        <img src = {assets.compass_icon} alt = ""/>
-                    </div>
-                    <div className="card">
-                        <p>Briefly summarise this concept: urban planning</p>
-                        <img src = {assets.bulb_icon} alt = ""/>
-                    </div>
-                    <div className="card">
-                        <p>Brainstorm bonding activities for our work retreat</p>
-                        <img src = {assets.message_icon} alt = ""/>
-                    </div>
-                    <div className="card">
-                        <p>Improve the readability of the following code</p>
-                        <img src = {assets.code_icon} alt = ""/>
-                    </div>
-                </div>
+                            {cards.map((card, index) => (
+                                <div key={index} onClick={() => handleCardClick(card.prompt)} className="card">
+                                    <p>{card.prompt}</p>
+                                    <img src={card.icon} alt="" />
+                                </div>
+                            ))}
+                        </div>
             </>
             : 
             <>
@@ -71,7 +84,7 @@ const Main = () => {
                     <div>
                         <img src={assets.gallery_icon} alt="" /> 
                         <img src={assets.mic_icon} alt="" />
-                        <img onClick = {()=>onSent()} src={assets.send_icon} alt="" />
+                        {input ? <img onClick = {()=>onSent()} src={assets.send_icon} alt="" />  : null}
                     </div>
                 </div>
                 <p className="bottom-info"> 
