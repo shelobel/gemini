@@ -12,7 +12,7 @@ import yt_icon from './yt-icon.png'
 import message_icon from './message-icon.png'
 import code_icon from './code_icon.png'
 import send_icon from './send-icon.png'
-import gemini_icon from './gemini-icon.png'
+import gemini_icon from './gemini-icon2.png'
 
 export const assets = {
     history_icon,

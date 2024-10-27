@@ -10,15 +10,32 @@ const ContextProvider = (props) => {
     const [recentPrompt, setRecentPrompt] = useState("");
     const [prevPrompts, setPrevPrompts] = useState([]);
     const [showResult, setShowResult] = useState(false);
+    const [loading,setLoading] = useState(false);
+    const [resultData, setResultData] = useState("");
 
     const onSent = async (prompt) => {
-        await run(prompt)
+
+        setResultData("")
+        setLoading(true) 
+        setShowResult(true)
+        setRecentPrompt(input)
+        const response = await run(input) 
+        setResultData(response)
+        setLoading(false)
+        setInput("")
     }
 
-    onSent("who is the father of the nation")
-
     const contextValue = {
-
+        prevPrompts,
+        setPrevPrompts,
+        onSent,
+        setRecentPrompt,
+        recentPrompt,
+        showResult,
+        input,
+        setInput,
+        loading,
+        resultData,
     }
 
     return (
